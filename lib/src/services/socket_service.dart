@@ -48,7 +48,7 @@ class SocketService {
       "data": {'id': userId, 'isTyping': isTyping, 'userName': _userName},
       "timeout": 1000
     };
-    socket.emit("send-room-message-v2", options);
+    socket.emit("${dotenv.env['SENT']}", options);
   }
 
   void createSocketConnection() {
@@ -70,7 +70,7 @@ class SocketService {
         dev.log("socket serve ID : ${_[0]}");
       });
 
-      socket.on('receive-room-message', (_) {
+      socket.on('${dotenv.env['RECEIVE']}', (_) {
         final isYourRoom = _["room_name"] == _room;
         if (isYourRoom) {
           String myRoom = _["room_name"];
