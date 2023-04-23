@@ -39,7 +39,7 @@ class SocketService {
     );
     final options = {"room_name": _room, "data": message.toJson(), "timeout": 1000};
     _chatResponse.sink.add(message);
-    socket.emit("send-room-message-v2", options);
+    socket.emit("${dotenv.env['SENT']}", options);
   }
 
   void isTyping(bool isTyping) {
@@ -63,7 +63,7 @@ class SocketService {
 
     socket.onConnect((_) {
       dev.log('Socket message to ${socket.id} is connected !!');
-      socket.emit('join-room', _room);
+      socket.emit("${dotenv.env['JOIN']}", _room);
       // Join room
 
       socket.on('id', (_) {
